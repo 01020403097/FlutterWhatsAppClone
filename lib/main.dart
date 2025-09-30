@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "WhatsAppChat",
+      title: "WhatsAppChatDemo",
       theme: ThemeData(
         primaryColor: Color(0xff075E54),
         hintColor: Color(0xff25D366),
