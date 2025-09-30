@@ -7,7 +7,7 @@ import 'package:flutterwhatsapp/pages/status_screen.dart';
 
 class WhatsAppHome extends StatefulWidget {
   final List<CameraDescription> cameras;
-  WhatsAppHome({this.cameras});
+  WhatsAppHome({required this.cameras});
 
   @override
   _WhatsAppHomeState createState() => _WhatsAppHomeState();
@@ -15,13 +15,12 @@ class WhatsAppHome extends StatefulWidget {
 
 class _WhatsAppHomeState extends State<WhatsAppHome>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   bool showFab = true;
 
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(vsync: this, initialIndex: 1, length: 4);
     _tabController.addListener(() {
       if (_tabController.index == 1) {
@@ -42,28 +41,22 @@ class _WhatsAppHomeState extends State<WhatsAppHome>
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
-          tabs: <Widget>[
+          tabs: const [
             Tab(icon: Icon(Icons.camera_alt)),
             Tab(text: "CHATS"),
-            Tab(
-              text: "STATUS",
-            ),
-            Tab(
-              text: "CALLS",
-            ),
+            Tab(text: "STATUS"),
+            Tab(text: "CALLS"),
           ],
         ),
-        actions: <Widget>[
+        actions: const [
           Icon(Icons.search),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          ),
-          Icon(Icons.more_vert)
+          SizedBox(width: 5),
+          Icon(Icons.more_vert),
         ],
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[
+        children: [
           CameraScreen(widget.cameras),
           ChatScreen(),
           StatusScreen(),
@@ -72,13 +65,10 @@ class _WhatsAppHomeState extends State<WhatsAppHome>
       ),
       floatingActionButton: showFab
           ? FloatingActionButton(
-              backgroundColor: Theme.of(context).accentColor,
-              child: Icon(
-                Icons.message,
-                color: Colors.white,
-              ),
-              onPressed: () => print("open chats"),
-            )
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.message, color: Colors.white),
+        onPressed: () => print("open chats"),
+      )
           : null,
     );
   }
